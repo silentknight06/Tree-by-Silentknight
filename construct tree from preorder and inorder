@@ -1,0 +1,49 @@
+
+class Solution{
+
+    public:
+
+    
+
+    int search(int inorder[], int n, int curr){
+
+        for(int i = 0; i<n;i++){
+
+            if(inorder[i] == curr){
+
+                return i;
+
+            }
+
+        }
+
+        return -1;
+
+    }
+    Node* buildTree(int inorder[],int preorder[], int n){
+        int preorderIndex = 0;
+        return constructTree(inorder,preorder,preorderIndex,0,n-1,n);
+    }
+    Node* constructTree(int inorder[], int preorder[], int &idx,int start, int end,int n)
+
+    {
+    if (start > end || idx >= n){
+        return NULL;
+    }
+    int curr = preorder[idx++];
+
+    Node *node = new Node(curr);
+
+    // If only 1 node in inorder
+
+    // if (start == end)
+
+    int pos = search(inorder, n, curr);
+
+    node->left = constructTree(inorder, preorder,idx, start, pos - 1,n);
+
+    node->right = constructTree(inorder, preorder,idx, pos + 1, end,n);
+    return node;
+
+}
+};

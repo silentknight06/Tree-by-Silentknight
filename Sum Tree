@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+    
+    int solve(Node *root){
+        if(root==NULL){
+            return 0;
+        }
+        if(root->left==NULL && root->right==NULL){
+            return root->data;
+        }
+        int a = solve(root->left);
+        if(a== -1)return -1;
+        
+        int b = solve(root->right);
+        if(b== -1) return -1;
+        if(root->data==a+b){
+            return a+b+root->data;
+        }else{
+            return -1;
+        }
+    }
+    
+    
+    bool isSumTree(Node* root)
+    {
+         // Your code hereif9
+         if( root==NULL || root->left==NULL && root->right==NULL){
+             return true;
+         }
+         int res = solve(root);
+         if(res != -1){
+             return true;
+         }else{
+             return false;
+         }
+    }
+};
